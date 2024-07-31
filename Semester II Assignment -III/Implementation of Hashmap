@@ -1,0 +1,90 @@
+class HashMapLinearProbing:
+    def __init__(self, size):
+        self.size = size
+        self.table = [None] * size
+
+    def hash_function(self, key):
+        return key % self.size
+
+    def find(self, key):
+        index = self.hash_function(key)
+        while self.table[index] is not None and self.table[index][0] != key:
+            index = (index + 1) % self.size
+        return self.table[index] is not None
+
+    def insert(self, key, value):
+        index = self.hash_function(key)
+        while self.table[index] is not None:
+            index = (index + 1) % self.size
+        self.table[index] = (key, value)
+
+    def remove(self, key):
+        index = self.hash_function(key)
+        while self.table[index] is not None and self.table[index][0] != key:
+            index = (index + 1) % self.size
+        if self.table[index] is not None:
+            self.table[index] = None
+
+
+
+class HashMapQuadraticProbing:
+    def __init__(self, size):
+        self.size = size
+        self.table = [None] * size
+
+    def hash_function(self, key):
+        return key % self.size
+
+    def find(self, key):
+        index = self.hash_function(key)
+        i = 1
+        while self.table[index] is not None and self.table[index][0] != key:
+            index = (index + i**2) % self.size
+            i += 1
+        return self.table[index] is not None
+
+    def insert(self, key, value):
+        index = self.hash_function(key)
+        i = 1
+        while self.table[index] is not None:
+            index = (index + i**2) % self.size
+            i += 1
+        self.table[index] = (key, value)
+
+    def remove(self, key):
+        index = self.hash_function(key)
+        i = 1
+        while self.table[index] is not None and self.table[index][0] != key:
+            index = (index + i**2) % self.size
+            i += 1
+        if self.table[index] is not None:
+            self.table[index] = None
+
+
+
+
+class HashMapSeparateChaining:
+    def __init__(self, size):
+        self.size = size
+        self.table = [[] for _ in range(size)]
+
+    def hash_function(self, key):
+        return key % self.size
+
+    def find(self, key):
+        index = self.hash_function(key)
+        for k, v in self.table[index]:
+            if k == key:
+                return True
+        return False
+
+    def insert(self, key, value):
+        index = self.hash_function(key)
+        self.table[index].append((key, value))
+
+    def remove(self, key):
+        index = self.hash_function(key)
+        for i, (k, v) in enumerate(self.table[index]):
+            if k == key:
+                del self.table[index][i]
+                break
