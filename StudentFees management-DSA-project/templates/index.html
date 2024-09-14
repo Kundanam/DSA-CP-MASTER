@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <script src="/static/script.js"></script>
+    <style>
+          .container{ 
+            margin: 150px;
+            background-color: aqua;
+            display:flex;
+            align-content: center;
+            align-items: center;
+            width:150 px;
+            height: 300px;
+
+        }
+    </style>
+</head>
+<body>  
+    <h2>Student Management System</h2>  
+    <div class="container">
+
+  
+    <form id="studentForm">
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id"><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="class_no">Class No:</label>
+        <input type="text" id="class_no" name="class_no"><br><br>
+
+        <label for="fees">Fees:</label>
+        <input type="text" id="fees" name="fees"><br><br>
+
+        <button type="button" onclick="addStudent()">Add Student</button>
+        <button type="button" onclick="displayStudents()">Display Students</button>
+    </form>
+    </div>
+
+    <div id="output"></div>
+
+    
+</body>
+</html>
+<!-- http://127.0.0.1:5000/ -->
+     <!-- for run -->
